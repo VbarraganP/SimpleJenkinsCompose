@@ -1,3 +1,3 @@
 FROM node:16-alpine
 
-RUN apk add -U git curl docker docker-compose
+RUN apk add -U git curl docker
