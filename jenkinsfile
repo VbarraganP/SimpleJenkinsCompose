@@ -1,9 +1,5 @@
 pipeline {
-  agent { 
-    node {
-      label 'docker-agent-1'
-    }
-  }
+  agent { dockerfile true  }
   stages {
     stage("verify tooling") {
       steps {
