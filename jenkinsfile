@@ -1,20 +1,16 @@
 pipeline {
   agent { 
-    docker {
-      image 'jenkins/jenkins:lts'
-      args '-u root'
-      label 'docker'
-    }
+    docker { dockerfile true }
   }
   stages {
     stage("Initialize") {
-    steps {
-      script {
-        def dockerHome = tool 'docker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+      steps {
+        script {
+          def dockerHome = tool 'docker'
+          env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
       }
     }
-  }
     stage("verify tooling") {
       steps {
         sh '''
