@@ -1,7 +1,14 @@
 pipeline {
   agent { 
-    node {
-      label 'docker-agent-python'
+    docker {
+      image 'jenkins/jenkins:lts'
+      args '-u root'
+      label 'docker'
+      tools {
+        maven 'maven'
+        jdk 'jdk'
+        docker 'docker'
+      }
     }
   }
   stages {
