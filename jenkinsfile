@@ -1,15 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage("Initialize") {
-      steps {
-        script {
-          def dockerHome = tool 'docker'
-          env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
-        sh 'sudo usermod -a -G docker $USER'
-      }
-    }
     stage("verify tooling") {
       steps {
         sh '''
@@ -23,13 +14,13 @@ pipeline {
     }
     stage('Prune Docker data') {
       steps {
-        sh 'sudo docker system prune -a --volumes -f'
+        sh 'docker system prune -a --volumes -f'
       }
     }
     stage('Start container') {
       steps {
-        sh 'sudo docker compose up -d --no-color --wait'
-        sh 'sudo docker compose ps'
+        sh 'docker compose up -d --no-color --wait'
+        sh 'docker compose ps'
       }
     }
     stage('Run tests against the container') {
