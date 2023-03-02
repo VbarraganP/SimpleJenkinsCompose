@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+  agent { 
+    node {
+      label 'my_docker_in_docker'
+    }
+  }
   stages {
     stage("verify tooling") {
       steps {
