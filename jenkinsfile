@@ -4,7 +4,8 @@ pipeline {
       label 'docker-agent-alpine'
     }
   }
-  stage("Initialize") {
+  stages {
+    stage("Initialize") {
     steps {
       script {
         def dockerHome = tool 'docker'
@@ -12,7 +13,6 @@ pipeline {
       }
     }
   }
-  stages {
     stage("verify tooling") {
       steps {
         sh '''
